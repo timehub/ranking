@@ -1,0 +1,57 @@
+!!!
+%html
+  %head
+    %title Rally on Rails Results!
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "ie=edge", "http-equiv" => "x-ua-compatible"}/
+    %meta{:content => "Emmanuel Oga", :name => "author"}/
+    %meta{:content => "Licensed under GPL and MIT.", :name => "copyright"}/
+    %meta{:content => "Results", :name => "description"}/
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"}
+
+    %style{:type => "text/css"}
+      = File.read("stylesheets/r.css")
+
+
+    %script{:type => "application/javascript"}
+      = File.read("javascripts/dt.js")
+
+    %script{:type => "application/javascript"}
+      :plain
+        $(function(){
+          $("#scores").dataTable({ "iDisplayLength": 50, "aaSorting": [[8,'desc']] });
+        });
+
+  %body
+    %h1
+      %a{:href => "http://rallyonrails.com/teams" } Rally On Rails Results
+    %h2
+      Voting Completion (estimate):
+      = "#{(100 * @apps.select { |a| a.total > 0 }.length / @apps.length)}%"
+
+    %p
+      Refresh every now and then to get updates.
+      %small
+        %a{:href => "https://gist.github.com/1148224" } ( gist )
+
+    %table#scores
+      %thead
+        %tr
+          - [:app, :members, :team, :integrity, :interface, :originality, :utility, "Stars Avg", "Judge Points"].each do |attr|
+            %th= attr.to_s.titleize
+
+      %tbody
+        - @apps.each do |app|
+          %tr{:class => (app.team.to_s =~ /jointstorm/i ? "me" : "not_me") }
+            %td
+              %a{:href => app.url}= app.title
+            %td
+              - app.members.each do |name|
+                %a{:href => "http://github.com/#{name}"}= name
+            %td
+              %a{:href => app.team_url}= app.team
+            - [:integrity, :interface, :originality, :utility].each do |attr|
+              %td= app.send(attr)
+
+            %td= app.total
+            %td.total= app.score
