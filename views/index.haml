@@ -9,40 +9,36 @@
     %meta{:content => "Results", :name => "description"}/
     %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"}
 
-    %style{:type => "text/css"}
-      = File.read("stylesheets/r.css")
-
-
-    %script{:type => "application/javascript"}
-      = File.read("javascripts/dt.js")
-
+      
+    %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheets/ranking.css"}
+        
+    %script{:type => "application/javascript", :src => "javascripts/dt.js"}
     %script{:type => "application/javascript"}
       :plain
         $(function(){
-          $("#scores").dataTable({ "iDisplayLength": 50, "aaSorting": [[8,'desc']] });
+          $("#scores").dataTable({ "iDisplayLength": 50, "aaSorting": [[9,'desc']] });
         });
 
   %body
     %h1
       %a{:href => "http://rallyonrails.com/teams" } Rally On Rails Results
-    %h2
-      Voting Completion (estimate):
-      = "#{(100 * @apps.select { |a| a.total > 0 }.length / @apps.length)}%"
 
     %p
       Refresh every now and then to get updates.
       %small
-        %a{:href => "https://gist.github.com/1148224" } ( gist )
+        %a{:href => "https://github.com/timehub/ranking" } (source code)
 
     %table#scores
       %thead
         %tr
-          - [:app, :members, :team, :integrity, :interface, :originality, :utility, "Stars Avg", "Judge Points"].each do |attr|
+          - [:position, :app, :members, :team, :integrity, :interface, :originality, :usefulness, "Average stars", "Judge Points"].each do |attr|
             %th= attr.to_s.titleize
 
       %tbody
-        - @apps.each do |app|
+        - @apps.each_with_index do |app, position|
           %tr{:class => (app.team.to_s =~ /jointstorm/i ? "me" : "not_me") }
+            %td
+              = position + 1
             %td
               %a{:href => app.url}= app.title
             %td
@@ -51,7 +47,7 @@
             %td
               %a{:href => app.team_url}= app.team
             - [:integrity, :interface, :originality, :utility].each do |attr|
-              %td= app.send(attr)
+              %td= app.send(attr).round(2)
 
-            %td= app.total
+            %td= app.total.round(2)
             %td.total= app.score
