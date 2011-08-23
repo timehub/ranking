@@ -1,0 +1,111 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html> 
+  <head> 
+    <title>Rally on Rails Results - Brought to you by Timehub.net</title> 
+    <meta charset='utf-8' /> 
+    <meta content='ie=edge' http-equiv='x-ua-compatible' /> 
+    <meta content='Emmanuel Oga, Andrés Mejía' name='author' /> 
+    <meta content='Licensed under GPL and MIT.' name='copyright' /> 
+    <meta content='Results' name='description' /> 
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'></script> 
+    <link href='stylesheets/ribbon.css' rel='stylesheet' type='text/css' /> 
+    <link href='stylesheets/gh_buttons.css' rel='stylesheet' type='text/css' /> 
+    <link href='stylesheets/ranking.css' rel='stylesheet' type='text/css' /> 
+    <script src='javascripts/dt.js' type='application/javascript'></script> 
+    <script type='application/javascript'> 
+      $(function(){
+        $("#scores").dataTable({ "iDisplayLength": 50, "aaSorting": [[11,'desc']] });
+      });
+    </script> 
+  </head> 
+  <body> 
+    <div class='right ribbon-holder'> 
+      <a class='darkblue ribbon' href='http://rallyonrails.com/teams/47' target='_blank'> 
+        <span class='text'> 
+          Vote for us
+        </span> 
+      </a> 
+    </div> 
+    <div class='wrapper' id='main'> 
+      <h1> 
+        <a href='http://rallyonrails.com/teams'>Ayudanos a ganar</a> 
+      </h1> 
+      <h2> 
+        Mantengamos a
+        <span class='timehub_logo'>TimeHub</span> 
+        en la cima.
+      </h2> 
+
+      <h2>¿Qué es esto?</h2>
+      
+      <p>Nicolás Hock, Juan Esteban Pemberthy y Andrés Mejía participamos en un concurso de programación en el que construimos
+        una aplicación en 48 horas. ¡Necesitamos tu voto para ganar!</p>
+        
+      <h2>¿Cómo voto?</h2>
+      
+      <div class="instructions">
+        
+        <div>
+          <div class="step_number">Paso 1</div>
+          <div> Escoge uno de estos:</div>
+          <div style="line-height: 35px">
+            <a href="http://rallyonrails.com/auth/facebook" title="Facebook" target="_blank"><img alt="Facebook" src="http://rallyonrails.com/images/facebook.png?1314140882"></a>
+            <a href="http://rallyonrails.com/auth/twitter" title="Twitter" target="_blank"><img alt="Twitter" src="http://rallyonrails.com/images/twitter.gif?1314140882"></a>
+            <a href="http://rallyonrails.com/auth/github" title="Github" target="_blank"><img alt="Github" src="http://rallyonrails.com/images/github.png?1314140882"></a>
+            <br />
+            Después haz click en el botón que dice "Autorizar" y vuelve a esta ventana.
+          </div>
+        </div>
+        
+        <div class="step_number">Paso 2</div>
+        <div>
+          <a style="font-size: 30px" href="http://rallyonrails.com/teams/47#ajaxful_rating_judge_usefulness_no-small_application_42" target="_blank">Haz click en este link</a>.
+          Se abrirá en una nueva pestaña.
+        </div>
+        
+        <div class="step_number">Paso 3</div>
+        <div>
+          ¡Haz click en la última estrella de cada fila!
+          <div>
+            <img src="https://img.skitch.com/20110824-18nabhn9xi5h1r7e4g3y8673eq.png" alt="Vote" />
+          </div>
+        </div>
+        
+        <div class="step_number">Paso 4</div>
+        <div>
+          <h2>Nada más. Reclama un helado gratis en el cielo cuando mueras.</h2>
+        </div>        
+      </div>
+      
+    </div> 
+    <div class='wrapper' id='footer'> 
+      <a href='http://rallyonrails.com/teams/47' target='_blank'> 
+        <img alt='Vote for us!' src='http://timehub.net/images/rally.png' title='Vote for us!' /> 
+      </a> 
+      <div style='margin-top: 20px'> 
+        Created by
+        <a href='http://rallyonrails.com/teams/47' target='_blank'>Funky Town</a> 
+      </div> 
+      <div style='margin-top: 20px'> 
+        <a href='https://github.com/andmej' target='_blank'>Andrés Mejía Posada</a> 
+        |
+        <a href='https://github.com/jpemberthy' target='_blank'>Juan Esteban Pemberthy</a> 
+        |
+        <a href='https://github.com/nhocki' target='_blank'>Nicolás Hock Isaza</a> 
+      </div> 
+    </div> 
+  </body> 
+  <script type='application/javascript'> 
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-25135614-1']);
+    _gaq.push(['_setDomainName', '.timehub.net']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script> 
+</html>

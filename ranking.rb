@@ -117,4 +117,8 @@ else
   get "/cheating" do
     erb :cheating
   end
+  
+  get "/como_votar" do
+    erb :como_votar
+  end
 end
