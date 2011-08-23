@@ -18,7 +18,7 @@
     %script{:type => "application/javascript"}
       :plain
         $(function(){
-          $("#scores").dataTable({ "iDisplayLength": 50, "aaSorting": [[9,'desc']] });
+          $("#scores").dataTable({ "iDisplayLength": 50, "aaSorting": [[10,'desc']] });
         });
 
   %body
@@ -28,7 +28,7 @@
           Vote for us
     %div#main.wrapper
       %h1
-        %a{:href => "http://rallyonrails.com/teams" } Rally On Rails Scoreboard
+        %a{:href => "http://rallyonrails.com/teams" } Rally On Rails '11 Scoreboard
       %h2
         Help us keep
         %span.timehub_logo TimeHub
@@ -39,7 +39,7 @@
       %table#scores
         %thead
           %tr
-            - [:position, :app, :members, :team, :integrity, :interface, :originality, :usefulness, "Average stars", "Judge Points"].each do |attr|
+            - [:position, :app, :members, :team, "Judges points", "Judges average stars", :integrity, :interface, :originality, :usefulness, "Public points", "Public average stars"].each do |attr|
               %th= attr.to_s.titleize
 
         %tbody
@@ -51,14 +51,20 @@
                 %a{:href => app.url}= app.title
               %td
                 - app.members.each do |name|
-                  %a{:href => "http://github.com/#{name}"}= name
+                  %div
+                    %a{:href => "http://github.com/#{name}"}= name
               %td
                 %a{:href => app.team_url}= app.team
-              - [:integrity, :interface, :originality, :utility].each do |attr|
+
+              %td= app.judges_score
+              %td.total= app.judges_total.round(2)
+              
+              - [:judges_integrity, :judges_interface, :judges_originality, :judges_utility].each do |attr|
                 %td= app.send(attr).round(2)
 
-              %td= app.total.round(2)
-              %td.total= app.score
+              %td= app.public_score
+              %td.total= app.public_total.round(2)
+
               
       %p
         Refresh every now and then to get updates.

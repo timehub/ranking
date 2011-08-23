@@ -82,7 +82,7 @@ class App < ActiveRecord::Base
   end
 
   def <=> (other)
-    other.public_score <=> public_score
+    other.public_total <=> public_total
   end
 
   def to_s
