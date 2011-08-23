@@ -3,6 +3,8 @@ require 'nokogiri'
 require 'open-uri'
 require 'mysql2'
 require 'active_record'
+require 'active_support/all'
+
 
 ActiveRecord::Base.establish_connection(
   adapter: "mysql2", encoding: "utf8", database: "timehub_ranking", username: "root", password: ""
@@ -13,8 +15,9 @@ class App < ActiveRecord::Base
     ActiveRecord::Schema.define do
       create_table(:apps) do |t|
         t.string :title, :team, :url, :members, :team_url
-        t.float :integrity, :interface, :originality, :utility
-        t.integer :score
+        t.float :judges_integrity, :judges_interface, :judges_originality, :judges_utility
+        t.float :public_integrity, :public_interface, :public_originality, :public_utility        
+        t.integer :judges_score, :public_score
       end rescue nil
     end
   end
@@ -27,23 +30,36 @@ class App < ActiveRecord::Base
     url = doc.at("h3 a")["href"]
     votes = (doc / ".stars-1").map { |node| node.text.to_f }
 
-    score = doc.css("section hgroup h2").map(&:content).map do |line|
+    scores = doc.css("section hgroup h2").map(&:content).map do |line|
       match_data = line.match(/\((.*)(\ pts.\))/)
       match_data[1] if match_data
-    end.compact.first.to_i
+    end.compact
+    
+    judges_score = scores.first
+    public_score = scores.second
 
     app = find_or_initialize_by_url(url)
 
-    app.update_attributes :team         => (doc / "h1")[1].text,
-                          :title        => doc.at("h3").text,
-                          :url          => url,
-                          :members      => doc.at("ul.members").children.map(&:text).map { |m| m.gsub(/\s+|\n/m, "") }.flatten.reject(&:blank?).join(" "),
-                          :integrity    => votes[0],
-                          :interface    => votes[1],
-                          :originality  => votes[2],
-                          :utility      => votes[3],
-                          :team_url     => team_url,
-                          :score        => score
+    app.update_attributes :team               => (doc / "h1")[1].text,
+                          :title              => doc.at("h3").text,
+                          :url                => url,
+                          :members            => doc.at("ul.members").children.map(&:text).map { |m| m.gsub(/\s+|\n/m, "") }.flatten.reject(&:blank?).join(" "),
+                          
+                          :judges_integrity   => votes[0],
+                          :judges_interface   => votes[1],
+                          :judges_originality => votes[2],
+                          :judges_utility     => votes[3],
+                          
+                          :public_integrity   => votes[4],
+                          :public_interface   => votes[5],
+                          :public_originality => votes[6],
+                          :public_utility     => votes[7],
+                                                    
+                          :team_url           => team_url,
+                          :judges_score       => judges_score,
+                          :public_score       => public_score
+    
+    puts app.attributes
   rescue
     nil
   end
@@ -57,12 +73,16 @@ class App < ActiveRecord::Base
     end.compact.sort
   end
 
-  def total
-    (integrity || 0) + (interface || 0) + (originality || 0) + (utility || 0)
+  def judges_total
+    (judges_integrity || 0) + (judges_interface || 0) + (judges_originality || 0) + (judges_utility || 0)
+  end
+
+  def public_total
+    (public_integrity || 0) + (public_interface || 0) + (public_originality || 0) + (public_utility || 0)
   end
 
   def <=> (other)
-    other.score <=> score
+    other.public_score <=> public_score
   end
 
   def to_s

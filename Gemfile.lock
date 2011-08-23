@@ -29,6 +29,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  activesupport
   haml
   mysql2
   nokogiri
