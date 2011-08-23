@@ -35,13 +35,36 @@ table {
   box-shadow: 2px 2px 2px #ccc;
 }
 
+.total { font-weight: bold; color: green; font-size: 15px; }
+.me { background-color: #afa !important; }
+
+
 th                 { background: #efefef }
 tr:nth-child(even) { background: #fefefe }
 tr:nth-child(odd)  { background: #efefef }
-tr:hover { background: yellow; }
+
+tr:hover {
+  background-color: #3C8DDE;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#599bdc), to(#3072b3));
+  background-image: -moz-linear-gradient(#599bdc, #3072b3);
+  background-image: -o-linear-gradient(#599bdc, #3072b3);
+  background-image: linear-gradient(#599bdc, #3072b3);
+  color: white;
+}
+
+tr:hover th {
+  color: black;
+}
+
+tr:hover a {
+  color: whiteSmoke;
+}
+
+tr:hover .total {
+  color: whiteSmoke;
+}
+
 td, tr, th { padding: 5px; }
-.total { font-weight: bold; color: green; font-size: 15px; }
-.me { background-color: #afa !important; }
 
 #scores_length, #scores_info, #scores_filter {
   display: none;
