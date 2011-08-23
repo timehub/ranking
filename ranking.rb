@@ -10,7 +10,7 @@ database_config = YAML.load_file(File.join(File.dirname(__FILE__), 'config/datab
 
 puts "Connecting to database..."
 ActiveRecord::Base.establish_connection(
-  adapter: "mysql2", encoding: "utf8", database: "timehub_ranking", username: database_config[:username], password: database_config[:password]
+  adapter: "mysql2", encoding: "utf8", database: "timehub_ranking", username: database_config["username"], password: database_config["password"]
 )
 
 class App < ActiveRecord::Base
