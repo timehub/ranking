@@ -1,16 +1,17 @@
 !!!
 %html
   %head
-    %title Rally on Rails Results!
+    %title Rally on Rails Results - Brought to you by Timehub.net
     %meta{:charset => "utf-8"}/
     %meta{:content => "ie=edge", "http-equiv" => "x-ua-compatible"}/
-    %meta{:content => "Emmanuel Oga", :name => "author"}/
+    %meta{:content => "Emmanuel Oga, Andrés Mejía", :name => "author"}/
     %meta{:content => "Licensed under GPL and MIT.", :name => "copyright"}/
     %meta{:content => "Results", :name => "description"}/
     %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"}
 
       
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheets/ranking.css"}
+    %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheets/ribbon.css"}        
         
     %script{:type => "application/javascript", :src => "javascripts/dt.js"}
     %script{:type => "application/javascript"}
@@ -20,34 +21,39 @@
         });
 
   %body
-    %h1
-      %a{:href => "http://rallyonrails.com/teams" } Rally On Rails Results
+    %div.right.ribbon-holder
+      %a.darkblue.ribbon{:href => "http://rallyonrails.com/teams/47", :target => "_blank"}
+        %span.text
+          Vote for us
+    %div#main.wrapper
+      %h1
+        %a{:href => "http://rallyonrails.com/teams" } Rally On Rails Results
 
-    %p
-      Refresh every now and then to get updates.
-      %small
-        %a{:href => "https://github.com/timehub/ranking" } (source code)
+      %p
+        Refresh every now and then to get updates.
+        %small
+          %a{:href => "https://github.com/timehub/ranking" } (source code)
 
-    %table#scores
-      %thead
-        %tr
-          - [:position, :app, :members, :team, :integrity, :interface, :originality, :usefulness, "Average stars", "Judge Points"].each do |attr|
-            %th= attr.to_s.titleize
+      %table#scores
+        %thead
+          %tr
+            - [:position, :app, :members, :team, :integrity, :interface, :originality, :usefulness, "Average stars", "Judge Points"].each do |attr|
+              %th= attr.to_s.titleize
 
-      %tbody
-        - @apps.each_with_index do |app, position|
-          %tr{:class => (app.team.to_s =~ /jointstorm/i ? "me" : "not_me") }
-            %td
-              = position + 1
-            %td
-              %a{:href => app.url}= app.title
-            %td
-              - app.members.each do |name|
-                %a{:href => "http://github.com/#{name}"}= name
-            %td
-              %a{:href => app.team_url}= app.team
-            - [:integrity, :interface, :originality, :utility].each do |attr|
-              %td= app.send(attr).round(2)
+        %tbody
+          - @apps.each_with_index do |app, position|
+            %tr{:class => (app.team.to_s =~ /jointstorm/i ? "me" : "not_me") }
+              %td
+                = position + 1
+              %td
+                %a{:href => app.url}= app.title
+              %td
+                - app.members.each do |name|
+                  %a{:href => "http://github.com/#{name}"}= name
+              %td
+                %a{:href => app.team_url}= app.team
+              - [:integrity, :interface, :originality, :utility].each do |attr|
+                %td= app.send(attr).round(2)
 
-            %td= app.total.round(2)
-            %td.total= app.score
+              %td= app.total.round(2)
+              %td.total= app.score
