@@ -35,41 +35,48 @@
         on top.        
       %a.button.vote_button{:href => "http://rallyonrails.com/teams/47#ajaxful_rating_judge_usefulness_no-small_application_42", :target => "_blank"}
         Vote for 
-        %span.timehub_logo TimeHub        
-      %table#scores
-        %thead
-          %tr
-            - [:position, :app, :members, :team, "Judges points", "Judges average stars", "Public integrity", "Public interface", "Public originality", "Public usefulness", "Public points", "Public average stars"].each do |attr|
-              %th= attr.to_s.titleize
-
-        %tbody
-          - @apps.each_with_index do |app, position|
-            %tr{:class => (app.team.to_s =~ /jointstorm/i ? "me" : "not_me") }
-              %td
-                = position + 1
-              %td
-                %a{:href => app.url}= app.title
-              %td
-                - app.members.each do |name|
-                  %div
-                    %a{:href => "http://github.com/#{name}"}= name
-              %td
-                %a{:href => app.team_url}= app.team
-
-              %td= app.judges_score
-              %td.total= app.judges_total.round(2)
-              
-              - [:public_integrity, :public_interface, :public_originality, :public_utility].each do |attr|
-                %td= app.send(attr).round(2)
-
-              %td= app.public_score
-              %td.total= app.public_total.round(2)
-
-              
-      %p
-        Refresh every now and then to get updates.
-        %small
-          %a{:href => "https://github.com/timehub/ranking" } (source code)
+        %span.timehub_logo TimeHub
+        
+      %h1
+        %a{:href => "http://twitter.com/#!/rallyonrails/status/106107169946079232"} Someone is cheating.
+      %h2 The scoreboard will reappear here once the judges fix the vulnerability in the voting app.
+      %h3
+        %a{:href => "/cheating"} Read the details about the cheating episode.
+        
+      / %table#scores
+      /   %thead
+      /     %tr
+      /       - [:position, :app, :members, :team, "Judges points", "Judges average stars", "Public integrity", "Public interface", "Public originality", "Public usefulness", "Public points", "Public average stars"].each do |attr|
+      /         %th= attr.to_s.titleize
+      / 
+      /   %tbody
+      /     - @apps.each_with_index do |app, position|
+      /       %tr{:class => (app.team.to_s =~ /jointstorm/i ? "me" : "not_me") }
+      /         %td
+      /           = position + 1
+      /         %td
+      /           %a{:href => app.url}= app.title
+      /         %td
+      /           - app.members.each do |name|
+      /             %div
+      /               %a{:href => "http://github.com/#{name}"}= name
+      /         %td
+      /           %a{:href => app.team_url}= app.team
+      / 
+      /         %td= app.judges_score
+      /         %td.total= app.judges_total.round(2)
+      /         
+      /         - [:public_integrity, :public_interface, :public_originality, :public_utility].each do |attr|
+      /           %td= app.send(attr).round(2)
+      / 
+      /         %td= app.public_score
+      /         %td.total= app.public_total.round(2)
+      / 
+      /         
+      / %p
+      /         Refresh every now and then to get updates.
+      /         %small
+      /           %a{:href => "https://github.com/timehub/ranking" } (source code)
     
     #footer.wrapper
       %a{:href => "http://rallyonrails.com/teams/47", :target => "_blank"}

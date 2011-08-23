@@ -113,4 +113,8 @@ else
     @apps = App.all.sort
     haml :index
   end
+  
+  get "/cheating" do
+    erb :cheating
+  end
 end

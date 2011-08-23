@@ -111,3 +111,7 @@ td, tr, th { padding: 5px; }
   font-size: 1.8em;
   margin-bottom: 20px;
 }
+
+.cheat_report p {
+  text-align: left;
+}
