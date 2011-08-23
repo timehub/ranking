@@ -62,7 +62,7 @@ class App < ActiveRecord::Base
   end
 
   def <=> (other)
-    other.total <=> total
+    other.score <=> score
   end
 
   def to_s
@@ -81,7 +81,7 @@ if ARGV.first == "update"
   puts "Updating..."
   App.setup
   App.update_all
-  puts "done"
+  puts "Done. kthxbai."
 else
   require 'sinatra'
   require 'haml'
