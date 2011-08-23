@@ -3,6 +3,7 @@ Ranking
 
 Live rankings for the Rally on Rails. Sponsored by http://timehub.net.
 
+Based on original script by lucasefe: https://gist.github.com/1148224
 
 How to use
 ----------
