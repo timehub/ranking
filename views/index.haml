@@ -9,9 +9,10 @@
     %meta{:content => "Results", :name => "description"}/
     %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"}
 
-      
+
+    %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheets/ribbon.css"}
+    %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheets/gh_buttons.css"}      
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheets/ranking.css"}
-    %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheets/ribbon.css"}        
         
     %script{:type => "application/javascript", :src => "javascripts/dt.js"}
     %script{:type => "application/javascript"}
@@ -27,13 +28,14 @@
           Vote for us
     %div#main.wrapper
       %h1
-        %a{:href => "http://rallyonrails.com/teams" } Rally On Rails Results
-
-      %p
-        Refresh every now and then to get updates.
-        %small
-          %a{:href => "https://github.com/timehub/ranking" } (source code)
-
+        %a{:href => "http://rallyonrails.com/teams" } Rally On Rails Scoreboard
+      %h2
+        Help us keep
+        %span.timehub_logo TimeHub
+        on the top.        
+      %div.button.vote_button
+        Vote for 
+        %span.timehub_logo TimeHub        
       %table#scores
         %thead
           %tr
@@ -57,3 +59,21 @@
 
               %td= app.total.round(2)
               %td.total= app.score
+              
+      %p
+        Refresh every now and then to get updates.
+        %small
+          %a{:href => "https://github.com/timehub/ranking" } (source code)
+    
+    #footer.wrapper
+      %a{:href => "http://rallyonrails.com/teams/47", :target => "_blank"}
+        %img{:alt => "Vote for us!", :src => "http://timehub.net/images/rally.png", :title => "Vote for us!"}/
+      %div{:style => "margin-top: 20px"}
+        Created by
+        %a{:href => "http://rallyonrails.com/teams/47", :target => "_blank"} Funky Town
+      %div{:style => "margin-top: 20px"}
+        %a{:href => "https://github.com/andmej", :target => "_blank"} Andrés Mejía Posada
+        |
+        %a{:href => "https://github.com/jpemberthy", :target => "_blank"} Juan Esteban Pemberthy
+        |
+        %a{:href => "https://github.com/nhocki", :target => "_blank"} Nicolás Hock Isaza

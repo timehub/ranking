@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Amaranth:700);
+
 * {
   text-align: center;
 }
@@ -8,22 +10,29 @@ body {
   background-color: whiteSmoke;
 }
 
+a {
+  color: #257bc4;
+}
+
 h1 a {
-  font-size: 36px; font-weight: bold; text-decoration: none; 
+  font-size: 60px; font-weight: bold; text-decoration: none; 
+  color: black;
 }
 
 table {
   background-color: #ddd;
   margin: 2.5%;
-  width: 95%; padding: 10px; margin: 10px
+  width: 95%; 
+  padding: 2px;
+  margin: 10px;
   border: 1px solid #ddd;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px; /* future proofing */
-  -khtml-border-radius: 10px; /* for old Konqueror browsers */
-  -moz-box-shadow: 5px 5px 5px #ccc;
-  -webkit-box-shadow: 5px 5px 5px #ccc;
-  box-shadow: 5px 5px 5px #ccc;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; /* future proofing */
+  -khtml-border-radius: 5px; /* for old Konqueror browsers */
+  -moz-box-shadow: 2px 2px 2px #ccc;
+  -webkit-box-shadow: 2px 2px 2px #ccc;
+  box-shadow: 2px 2px 2px #ccc;
 }
 
 th                 { background: #efefef }
@@ -34,8 +43,21 @@ td, tr, th { padding: 5px; }
 .total { font-weight: bold; color: green; font-size: 15px; }
 .me { background-color: #afa !important; }
 
-#scores_length, #scores_info {
+#scores_length, #scores_info, #scores_filter {
   display: none;
+}
+
+.wrapper {
+  width: 940px;
+  margin: 0 auto; 
+}
+
+.wrapper:after {
+  clear: both;
+  content: ".";
+  height: 0;
+  display: none;
+  zoom: 1%; 
 }
 
 #main {
@@ -48,6 +70,21 @@ td, tr, th { padding: 5px; }
   -moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
   -ms-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
   -o-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7); }
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
 }
 
+#footer {
+  min-height: 80px;
+  margin: 10px auto 30px;
+  text-align: center; 
+}
+
+.timehub_logo {
+  font-family: 'Amaranth', sans-serif;  
+  font-size: 1.4em;
+}
+
+.vote_button {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
