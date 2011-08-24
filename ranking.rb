@@ -37,7 +37,7 @@ class App < ActiveRecord::Base
       match_data = line.match(/\((.*)(\ pts.\))/)
       match_data[1] if match_data
     end.compact
-    
+
     judges_score = scores.first
     public_score = scores.second
 
@@ -47,21 +47,21 @@ class App < ActiveRecord::Base
                           :title              => doc.at("h3").text,
                           :url                => url,
                           :members            => doc.at("ul.members").children.map(&:text).map { |m| m.gsub(/\s+|\n/m, "") }.flatten.reject(&:blank?).join(" "),
-                          
+
                           :judges_integrity   => votes[0],
                           :judges_interface   => votes[1],
                           :judges_originality => votes[2],
                           :judges_utility     => votes[3],
-                          
+
                           :public_integrity   => votes[4],
                           :public_interface   => votes[5],
                           :public_originality => votes[6],
                           :public_utility     => votes[7],
-                                                    
+
                           :team_url           => team_url,
                           :judges_score       => judges_score,
                           :public_score       => public_score
-    
+
     puts app.attributes
   rescue
     nil
@@ -113,12 +113,24 @@ else
     @apps = App.all.sort
     haml :index
   end
-  
+
   get "/cheating" do
     erb :cheating
   end
-  
+
+  get "/como-votar" do
+    erb :como_votar
+  end
+
   get "/como_votar" do
     erb :como_votar
+  end
+
+  get "/how_to_vote" do
+    erb :how_to_vote
+  end
+
+  get "/how-to-vote" do
+    erb :how_to_vote
   end
 end
