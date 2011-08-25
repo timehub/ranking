@@ -77,22 +77,30 @@ class App < ActiveRecord::Base
   end
 
   def current_score
-    0.85 * judges_total + 0.15 * public_total + extra_points
+    0.85 * judges_average_stars + 0.15 * public_average_stars + extra_points
   end
 
-  def total_points
-    (public_score / 20.0).round(2)
+  def public_number_of_voters
+    (public_total_stars / 20.0).round(2)
+  end
+  
+  def public_total_stars
+    public_score
+  end
+  
+  def judges_total_stars
+    judges_score
   end
 
   def extra_points
-    App.all.size - App.all.sort_by{|a| a.total_points}.reverse.index(self)
+    App.all.size - App.all.sort_by{|a| a.public_total_stars }.reverse.index(self)
   end
 
-  def judges_total
+  def judges_average_stars
     (judges_integrity || 0) + (judges_interface || 0) + (judges_originality || 0) + (judges_utility || 0)
   end
 
-  def public_total
+  def public_average_stars
     (public_integrity || 0) + (public_interface || 0) + (public_originality || 0) + (public_utility || 0)
   end
 

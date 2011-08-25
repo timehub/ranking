@@ -20,7 +20,7 @@
     %script{:type => "application/javascript"}
       :plain
         $(function(){
-          $("#scores").dataTable({ "iDisplayLength": 50, "aaSorting": [[11,'desc']] });
+          $("#scores").dataTable({ "iDisplayLength": 50, "aaSorting": [[7,'desc']] });
         });
 
     = File.read("views/_clicky.js")
@@ -59,7 +59,7 @@
         %table#scores
           %thead
             %tr
-              - [:position, :app, :members, :team, "Judges Avg.", "Public integrity", "Public interface", "Public originality", "Public usefulness", "Public Avg.", "Total Votes", "Current score"].each do |attr|
+              - [:position, :app, :members, :team, "Judges Avg.", "Public Avg.", "Total Votes", "Current score"].each do |attr|
                 %th= attr.to_s.titleize
       
           %tbody
@@ -76,14 +76,18 @@
                 %td
                   %a{:href => app.team_url}= app.team
       
-                %td= app.judges_total.round(2)
+                %td= app.judges_average_stars.round(2)
               
-                - [:public_integrity, :public_interface, :public_originality, :public_utility].each do |attr|
-                  %td= app.send(attr).round(2)
+                /- [:public_integrity, :public_interface, :public_originality, :public_utility].each do |attr|
+                /  %td= app.send(attr).round(2)
 
 
-                %td= app.public_total.round(2)
-                %td= app.total_points.round(2)
+                %td= app.public_average_stars.round(2)
+                %td
+                  = app.public_total_stars
+                  points voted by
+                  = app.public_number_of_voters.round(2)
+                  people
                 %td.total= app.current_score.round(2)
 
         %h3
