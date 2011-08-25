@@ -81,7 +81,7 @@ class App < ActiveRecord::Base
   end
 
   def total_points
-    judges_score + public_score
+    (public_score / 20.0).round(2)
   end
 
   def extra_points
