@@ -60,7 +60,7 @@
       %table#scores
         %thead
           %tr
-            - [:position, :app, :members, :team, "Judges points", "Public integrity", "Public interface", "Public originality", "Public usefulness", "Public points", "current score"].each do |attr|
+            - [:position, :app, :members, :team, "Judges Avg.", "Public integrity", "Public interface", "Public originality", "Public usefulness", "Public Avg.", "current score"].each do |attr|
               %th= attr.to_s.titleize
       
         %tbody
@@ -77,12 +77,12 @@
               %td
                 %a{:href => app.team_url}= app.team
       
-              %td= app.judges_score
+              %td= app.judges_total.round(2)
               
               - [:public_integrity, :public_interface, :public_originality, :public_utility].each do |attr|
                 %td= app.send(attr).round(2)
       
-              %td= app.public_score
+              %td= app.public_total.round(2)
               %td.total= app.current_score.round(2)
       
               
