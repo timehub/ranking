@@ -59,7 +59,7 @@
       
         %tbody
           - @apps.each_with_index do |app, position|
-            %tr{:class => (app.team.to_s =~ /jointstorm/i ? "me" : "not_me") }
+            %tr{:class => (app.team.to_s =~ /timehub/i ? "me" : "not_me") }
               %td
                 = position + 1
               %td
