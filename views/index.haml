@@ -71,12 +71,12 @@
               %td
                 %a{:href => app.team_url}= app.team
       
-              %td= app.judges_total
+              %td= app.judges_total.round(2)
               
               - [:public_integrity, :public_interface, :public_originality, :public_utility].each do |attr|
                 %td= app.send(attr).round(2)
       
-              %td= app.public_total
+              %td= app.public_total.round(2)
               %td.total= app.current_score.round(2)
       
               
