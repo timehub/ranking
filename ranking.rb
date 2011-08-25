@@ -131,7 +131,7 @@ else
 
   get("/") do
     @apps = App.all.sort
-    @hide_scoreboard = (params[:secret_token] != app_config["secret_token"])
+    @hide_scoreboard = false #(params[:secret_token] != app_config["secret_token"])
     haml :index
   end
 
