@@ -77,7 +77,7 @@ class App < ActiveRecord::Base
   end
   
   def current_score
-    0.75 * judges_score + 0.25 * public_score
+    0.75 * judges_total + 0.25 * public_total
   end
 
   def judges_total
