@@ -59,7 +59,7 @@
         %table#scores
           %thead
             %tr
-              - [:position, :app, :members, :team, "Judges Avg.", "Public Avg.", "Total Votes", "Current score"].each do |attr|
+              - [:position, :app, :members, :team, "Judges Avg.", "Public Avg.", "Estimated Number of Voters", "Total Points", "Current score"].each do |attr|
                 %th= attr.to_s.titleize
       
           %tbody
@@ -83,11 +83,8 @@
 
 
                 %td= app.public_average_stars.round(2)
-                %td
-                  = app.public_total_stars
-                  points by
-                  = app.public_number_of_voters.round(2)
-                  people
+                %td= app.public_number_of_voters.round(2)
+                %td= app.public_total_stars
                 %td.total= app.current_score.round(2)
 
         %h3
