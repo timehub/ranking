@@ -15,6 +15,8 @@
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheets/ranking.css"}
         
     %script{:type => "application/javascript", :src => "javascripts/dt.js"}
+    %script{:type => "application/javascript", :src => "javascripts/countdown.js"}
+        
     %script{:type => "application/javascript"}
       :plain
         $(function(){
@@ -44,6 +46,10 @@
         %a{:href => "/how-to-vote" } English Version 
         |
         %a{:href => "/como-votar" } Spanish Version
+        
+      %h2
+        %span#time-left
+        left for voting!  
       
       
       %h3
