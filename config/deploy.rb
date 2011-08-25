@@ -11,7 +11,7 @@ set :user, "elkin"
 
 set :deploy_to, "/var/apps/#{application}"
 
-set :global_shared_files, %w(config/database.yml)
+set :global_shared_files, %w(config/config.yml)
 set :rvm_ruby_string, '1.9.2-p180@ranking'
 set :rvm_type, :user
 

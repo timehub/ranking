@@ -6,11 +6,11 @@ require 'active_record'
 require 'active_support/all'
 
 
-database_config = YAML.load_file(File.join(File.dirname(__FILE__), 'config/database.yml'))
+app_config = YAML.load_file(File.join(File.dirname(__FILE__), 'config/config.yml'))
 
 puts "Connecting to database..."
 ActiveRecord::Base.establish_connection(
-adapter: "mysql2", encoding: "utf8", database: "timehub_ranking", username: database_config["username"], password: database_config["password"]
+  adapter: "mysql2", encoding: "utf8", database: "timehub_ranking", username: app_config["username"], password: app_config["password"]
 )
 
 class App < ActiveRecord::Base
@@ -44,23 +44,23 @@ class App < ActiveRecord::Base
     app = find_or_initialize_by_url(url)
 
     app.update_attributes :team               => (doc / "h1")[1].text,
-    :title              => doc.at("h3").text,
-    :url                => url,
-    :members            => doc.at("ul.members").children.map(&:text).map { |m| m.gsub(/\s+|\n/m, "") }.flatten.reject(&:blank?).join(" "),
+                          :title              => doc.at("h3").text,
+                          :url                => url,
+                          :members            => doc.at("ul.members").children.map(&:text).map { |m| m.gsub(/\s+|\n/m, "") }.flatten.reject(&:blank?).join(" "),
 
-    :judges_integrity   => votes[0],
-    :judges_interface   => votes[1],
-    :judges_originality => votes[2],
-    :judges_utility     => votes[3],
+                          :judges_integrity   => votes[0],
+                          :judges_interface   => votes[1],
+                          :judges_originality => votes[2],
+                          :judges_utility     => votes[3],
 
-    :public_integrity   => votes[4],
-    :public_interface   => votes[5],
-    :public_originality => votes[6],
-    :public_utility     => votes[7],
+                          :public_integrity   => votes[4],
+                          :public_interface   => votes[5],
+                          :public_originality => votes[6],
+                          :public_utility     => votes[7],
 
-    :team_url           => team_url,
-    :judges_score       => judges_score,
-    :public_score       => public_score
+                          :team_url           => team_url,
+                          :judges_score       => judges_score,
+                          :public_score       => public_score
 
     puts app.attributes
   rescue
@@ -119,6 +119,7 @@ else
 
   get("/") do
     @apps = App.all.sort
+    @hide_scoreboard = (params[:secret_token] != app_config["secret_token"])
     haml :index
   end
 
