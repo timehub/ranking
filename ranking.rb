@@ -81,7 +81,7 @@ class App < ActiveRecord::Base
   end
 
   def extra_points
-    App.all.size - App.all.sort_by{|a| a.public_score}.index(self)
+    App.all.size - App.all.sort_by{|a| a.public_score}.reverse.index(self)
   end
 
   def judges_total
