@@ -81,8 +81,9 @@
                 - [:public_integrity, :public_interface, :public_originality, :public_utility].each do |attr|
                   %td= app.send(attr).round(2)
 
-                %td= app.total_points.round(2)
+
                 %td= app.public_total.round(2)
+                %td= app.total_points.round(2)
                 %td.total= app.current_score.round(2)
 
         %h3
