@@ -75,6 +75,10 @@ class App < ActiveRecord::Base
       scrap(path) if path =~ /\/teams\/\d+/
     end.compact.sort
   end
+  
+  def current_score
+    0.75 * judges_total + 0.25 * public_total
+  end
 
   def judges_total
     (judges_integrity || 0) + (judges_interface || 0) + (judges_originality || 0) + (judges_utility || 0)

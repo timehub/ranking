@@ -53,7 +53,7 @@
       %table#scores
         %thead
           %tr
-            - [:position, :app, :members, :team, "Judges points", "Judges average stars", "Public integrity", "Public interface", "Public originality", "Public usefulness", "Public points", "Public average stars"].each do |attr|
+            - [:position, :app, :members, :team, "Judges points", "Judges average stars", "Public integrity", "Public interface", "Public originality", "Public usefulness", "Public points", "Public average stars", "current score"].each do |attr|
               %th= attr.to_s.titleize
       
         %tbody
@@ -78,6 +78,7 @@
       
               %td= app.public_score
               %td.total= app.public_total.round(2)
+              %td.total= app.current_score.round(2)
       
               
       %p
