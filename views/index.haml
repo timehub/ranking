@@ -50,45 +50,50 @@
       %h2
         %span#time-left
         left for voting!  
+            
+      - if @hide_scoreboard
+        %h1
+          %a{:href => "http://rallyonrails.com/teams/47#ajaxful_rating_judge_usefulness_no-small_application_42", :target => "_blank"} The Scoreboard Will Be Back!
+        %h1 For maximum intrigue and excitement, the scoreboard will be hidden until the voting phase is over.
+      - else
+        %table#scores
+          %thead
+            %tr
+              - [:position, :app, :members, :team, "Judges Avg.", "Public integrity", "Public interface", "Public originality", "Public usefulness", "Public Avg.", "current score"].each do |attr|
+                %th= attr.to_s.titleize
+      
+          %tbody
+            - @apps.each_with_index do |app, position|
+              %tr{:class => (app.team.to_s =~ /timehub/i ? "me" : "not_me") }
+                %td
+                  = position + 1
+                %td
+                  %a{:href => app.url}= app.title
+                %td
+                  - app.members.each do |name|
+                    %div
+                      %a{:href => "http://github.com/#{name}"}= name
+                %td
+                  %a{:href => app.team_url}= app.team
+      
+                %td= app.judges_total.round(2)
               
-      %table#scores
-        %thead
-          %tr
-            - [:position, :app, :members, :team, "Judges Avg.", "Public integrity", "Public interface", "Public originality", "Public usefulness", "Public Avg.", "current score"].each do |attr|
-              %th= attr.to_s.titleize
+                - [:public_integrity, :public_interface, :public_originality, :public_utility].each do |attr|
+                  %td= app.send(attr).round(2)
       
-        %tbody
-          - @apps.each_with_index do |app, position|
-            %tr{:class => (app.team.to_s =~ /timehub/i ? "me" : "not_me") }
-              %td
-                = position + 1
-              %td
-                %a{:href => app.url}= app.title
-              %td
-                - app.members.each do |name|
-                  %div
-                    %a{:href => "http://github.com/#{name}"}= name
-              %td
-                %a{:href => app.team_url}= app.team
-      
-              %td= app.judges_total.round(2)
-              
-              - [:public_integrity, :public_interface, :public_originality, :public_utility].each do |attr|
-                %td= app.send(attr).round(2)
-      
-              %td= app.public_total.round(2)
-              %td.total= app.current_score.round(2)
+                %td= app.public_total.round(2)
+                %td.total= app.current_score.round(2)
 
-      %h3
-        It seems like the
-        %a{:href => "/cheating"} the cheating episode
-        has been resolved.
+        %h3
+          It seems like the
+          %a{:href => "/cheating"} the cheating episode
+          has been resolved.
 
               
-      %p
-        Refresh every now and then to get updates.
-        %small
-          %a{:href => "https://github.com/timehub/ranking" } (source code)
+        %p
+          Refresh every now and then to get updates.
+          %small
+            %a{:href => "https://github.com/timehub/ranking" } (source code)
           
     #footer.wrapper
       %a{:href => "http://rallyonrails.com/teams/47", :target => "_blank"}

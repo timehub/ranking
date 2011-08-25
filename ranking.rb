@@ -6,11 +6,11 @@ require 'active_record'
 require 'active_support/all'
 
 
-database_config = YAML.load_file(File.join(File.dirname(__FILE__), 'config/database.yml'))
+app_config = YAML.load_file(File.join(File.dirname(__FILE__), 'config/config.yml'))
 
 puts "Connecting to database..."
 ActiveRecord::Base.establish_connection(
-  adapter: "mysql2", encoding: "utf8", database: "timehub_ranking", username: database_config["username"], password: database_config["password"]
+  adapter: "mysql2", encoding: "utf8", database: "timehub_ranking", username: app_config["username"], password: app_config["password"]
 )
 
 class App < ActiveRecord::Base
@@ -115,6 +115,7 @@ else
 
   get("/") do
     @apps = App.all.sort
+    @hide_scoreboard = (params[:secret_token] != app_config["secret_token"])
     haml :index
   end
 
