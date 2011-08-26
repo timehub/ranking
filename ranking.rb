@@ -81,7 +81,7 @@ class App < ActiveRecord::Base
   end
 
   def public_number_of_voters
-    (public_total_stars.to_d / public_average_stars.to_f).round(2)
+    (public_total_stars.to_f / public_average_starsto_f).round(2)
   end
   
   def public_total_stars
