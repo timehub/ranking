@@ -2,7 +2,7 @@ var javascript_countdown = function () {
     var time_left = 10; //number of seconds for countdown
     var output_element_id = 'javascript_countdown_time';
     var keep_counting = 1;
-    var no_time_left_message = '00:00:00';
+    var no_time_left_message = '';
  
     function countdown() {
         if(time_left < 2) {
